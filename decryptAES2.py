@@ -1,16 +1,16 @@
 import hashlib
 import binascii
 from Crypto.Cipher import AES
+
+##need to def SetKey() here...then implement below
 def setMasterKey(vKeyData, vSalt, nDerivIterations, nDerivationMethod):
     if nDerivationMethod != 0:
         nDerivationMethod = 0
     data = bytes(((vKeyData) + (vSalt)), 'ascii')
     for i in range(nDerivIterations):
         data = hashlib.sha512(data).digest()
-    key = data[0:32]
-    IV= data[32:32+16]
-    key =  binascii.hexlify(key)
-    IV =  binascii.hexlify(IV)
+    key = binascii.hexlify(data[0:32])
+    IV= binascii.hexlify(data[32:32+16])
     return(key, IV)
 
 passphrase = input("Please Enter your passphrase:")
@@ -28,7 +28,7 @@ encryptedMasterKey = bytes(input("Please enter the Encrypted Master key in hexid
 
 def Decrypt(data):
     return AES.new(keyBeenSet,AES.MODE_CBC,ivBeenSet).decrypt(data)[0:32]
-##need to def SetKey() here
+
 newKeyToShow = (binascii.hexlify(Decrypt(encryptedMasterKey)))
 newKey = binascii.unhexlify(newKeyToShow)
 setNewIV = bytes(input("Please Enter the Public key belonging to the encrypted Private Key your trying to recover:"), 'ascii')
@@ -45,6 +45,7 @@ def decryptEncPriv(data):
 print(binascii.hexlify(decryptEncPriv(encryptedPrivateKey)))
 
 ## keys and ivs need to have "ord()" operator inserted correctly!!!
+##below is an example as seen in pywallet
 # def ordsix(data):
 #     return ord(data)
 # def SetKey(self, key):
