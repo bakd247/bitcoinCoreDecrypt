@@ -44,6 +44,8 @@ def decryptEncPriv(data):
 
 print(binascii.hexlify(decryptEncPriv(encryptedPrivateKey)))
 ## keys and ivs need to have "ord()" operator inserted correctly!!!
+# def ordsix(data):
+#     return ord(data)
 # def SetKey(self, key):
 #     self.chKey = [ordsix(i) for i in key]
 
