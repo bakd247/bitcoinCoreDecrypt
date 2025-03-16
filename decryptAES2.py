@@ -31,7 +31,7 @@ def Decrypt(data):
 
 newKeyToShow = (binascii.hexlify(Decrypt(encryptedMasterKey)))
 newKey = binascii.unhexlify(newKeyToShow)
-setNewIV = bytes(input("Please Enter the encrypted Public key belonging to the encrypted Private Key your trying to recover:"), 'ascii')
+setNewIV = bytes(input("Please Enter the Public key belonging to the encrypted Private Key your trying to recover:"), 'ascii')
 newIV = (hashlib.sha256(hashlib.sha256(setNewIV).digest()).digest())[0:16]
 newIVToShow = binascii.hexlify(newIV)
 print("This is Your New Key:", newKeyToShow)
