@@ -28,7 +28,7 @@ encryptedMasterKey = bytes(input("Please enter the Encrypted Master key in hexid
 
 def Decrypt(data):
     return AES.new(keyBeenSet,AES.MODE_CBC,ivBeenSet).decrypt(data)[0:32]
-
+##need to def SetKey() here
 newKeyToShow = (binascii.hexlify(Decrypt(encryptedMasterKey)))
 newKey = binascii.unhexlify(newKeyToShow)
 setNewIV = bytes(input("Please Enter the Public key belonging to the encrypted Private Key your trying to recover:"), 'ascii')
@@ -43,6 +43,7 @@ def decryptEncPriv(data):
     return AES.new(newKey,AES.MODE_CBC,newIV).decrypt(encryptedPrivateKey)[0:32]
 
 print(binascii.hexlify(decryptEncPriv(encryptedPrivateKey)))
+
 ## keys and ivs need to have "ord()" operator inserted correctly!!!
 # def ordsix(data):
 #     return ord(data)
@@ -51,3 +52,7 @@ print(binascii.hexlify(decryptEncPriv(encryptedPrivateKey)))
 
 # def SetIV(self, iv):
 #     self.chIV = [ordsix(i) for i in iv]
+
+##Not sure if input is converted to bytes correctly or not either if using ord()
+
+##May need to set to encrypt first in order to get correct encrypted master key
