@@ -60,3 +60,25 @@ print(binascii.hexlify(decryptEncPriv(encryptedPrivateKey)))
 
 # def SetIV(self, iv):
 #     self.chIV = [ordsix(i) for i in iv]
+
+# def SetKeyFromPassphrase(self, vKeyData, vSalt, nDerivIterations, nDerivationMethod):
+#     if nDerivationMethod != 0:
+#         return 0
+#     data = str_to_bytes(vKeyData) + vSalt
+#     for i in xrange(nDerivIterations):
+#         data = hashlib.sha512(data).digest()
+#     self.SetKey(data[0:32])
+#     self.SetIV(data[32:32+16])
+#     return len(data)
+
+# def SetKey(self, key):
+#     self.chKey = key
+
+# def SetIV(self, iv):
+#     self.chIV = iv[0:16]
+
+# def Encrypt(self, data):
+#     return AES.new(self.chKey,AES.MODE_CBC,self.chIV).encrypt(append_PKCS7_padding(data))
+
+# def Decrypt(self, data):
+#     return AES.new(self.chKey,AES.MODE_CBC,self.chIV).decrypt(data)[0:32]
