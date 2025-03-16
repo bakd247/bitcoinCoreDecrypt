@@ -43,3 +43,4 @@ def decryptEncPriv(data):
     return AES.new(newKey,AES.MODE_CBC,newIV).decrypt(encryptedPrivateKey)[0:32]
 
 print(binascii.hexlify(decryptEncPriv(encryptedPrivateKey)))
+## Key needs to be set as little endian!!!
