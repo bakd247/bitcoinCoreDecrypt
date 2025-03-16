@@ -29,6 +29,7 @@ def Encrypt(data):
 def Decrypt(data):
     return AES.new(keyBeenSet,AES.MODE_CBC,ivBeenSet).decrypt(data)[0:32]
 
+# Need to append_PKCS7_padding to data prior to encryption
 encMaster= (binascii.hexlify(Encrypt(keyBeenSet)))
 
 print("This should match your EncryptedMaster Key:", encMaster)
@@ -59,7 +60,3 @@ print(binascii.hexlify(decryptEncPriv(encryptedPrivateKey)))
 
 # def SetIV(self, iv):
 #     self.chIV = [ordsix(i) for i in iv]
-
-##Not sure if input is converted to bytes correctly or not either if using ord()
-
-##May need to set to encrypt first in order to get correct encrypted master key
