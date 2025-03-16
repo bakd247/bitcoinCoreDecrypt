@@ -24,10 +24,16 @@ print(masterKey)
 keyBeenSet = binascii.unhexlify(masterKey[0])
 ivBeenSet = binascii.unhexlify(masterKey[1])
 
-encryptedMasterKey = bytes(input("Please enter the Encrypted Master key in hexidecimal format:"), 'ascii')
-
+def Encrypt(data):
+    return AES.new(keyBeenSet,AES.MODE_CBC,ivBeenSet).encrypt(data)
 def Decrypt(data):
     return AES.new(keyBeenSet,AES.MODE_CBC,ivBeenSet).decrypt(data)[0:32]
+
+encMaster= (binascii.hexlify(Encrypt(keyBeenSet)))
+
+print("This should match your EncryptedMaster Key:", encMaster)
+
+encryptedMasterKey = bytes(input("If your wallet contains the above key...Please enter the Encrypted Master key from your wallet in hexidecimal format to confirm:"), 'ascii')
 
 newKeyToShow = (binascii.hexlify(Decrypt(encryptedMasterKey)))
 newKey = binascii.unhexlify(newKeyToShow)
