@@ -3,6 +3,13 @@ import binascii
 from Crypto.Cipher import AES
 
 ##need to def SetKey() here...then implement below
+## keys and ivs need to have "ord()" operator inserted correctly!!!
+##below is an example as seen in pywallet
+# def ordsix(data):
+#     return ord(data)
+# def SetKey(self, key):
+#     self.chKey = [ordsix(i) for i in key]
+
 def setMasterKey(vKeyData, vSalt, nDerivIterations, nDerivationMethod):
     if nDerivationMethod != 0:
         nDerivationMethod = 0
@@ -30,6 +37,7 @@ def Decrypt(data):
     return AES.new(keyBeenSet,AES.MODE_CBC,ivBeenSet).decrypt(data)[0:32]
 
 # Need to append_PKCS7_padding to data prior to encryption
+
 encMaster= (binascii.hexlify(Encrypt(keyBeenSet)))
 
 print("This should match your EncryptedMaster Key:", encMaster)
@@ -51,12 +59,8 @@ def decryptEncPriv(data):
 
 print(binascii.hexlify(decryptEncPriv(encryptedPrivateKey)))
 
-## keys and ivs need to have "ord()" operator inserted correctly!!!
-##below is an example as seen in pywallet
-# def ordsix(data):
-#     return ord(data)
-# def SetKey(self, key):
-#     self.chKey = [ordsix(i) for i in key]
+
+##Example Code:
 
 # def SetIV(self, iv):
 #     self.chIV = [ordsix(i) for i in iv]
@@ -82,3 +86,22 @@ print(binascii.hexlify(decryptEncPriv(encryptedPrivateKey)))
 
 # def Decrypt(self, data):
 #     return AES.new(self.chKey,AES.MODE_CBC,self.chIV).decrypt(data)[0:32]
+
+# another implementation
+# if 'mkey' in json_db.keys() and 'salt' in json_db['mkey']:
+# 		crypted = True
+# if crypted:
+#     if passphrase:
+#         cry_master = binascii.unhexlify(json_db['mkey']['encrypted_key'])
+#         cry_salt   = binascii.unhexlify(json_db['mkey']['salt'])
+#         cry_rounds = json_db['mkey']['nDerivationIterations']
+#         cry_method = json_db['mkey']['nDerivationMethod']
+
+#         crypter.SetKeyFromPassphrase(passphrase, cry_salt, cry_rounds, cry_method)
+# #			if verbose:
+# #				print("Import with", passphrase, "", binascii.hexlify(cry_master), "", binascii.hexlify(cry_salt))
+#         masterkey = crypter.Decrypt(cry_master)
+#         crypter.SetKey(masterkey)
+#         crypter.SetIV(Hash(public_key))
+#         e = crypter.Encrypt(secret)
+#         ck_epk=e
