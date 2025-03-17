@@ -9,6 +9,8 @@ from Crypto.Cipher import AES
 #     return ord(data)
 # def SetKey(self, key):
 #     self.chKey = [ordsix(i) for i in key]
+# def SetIV(self, iv):
+#     self.chIV = [ordsix(i) for i in iv]
 
 def setMasterKey(vKeyData, vSalt, nDerivIterations, nDerivationMethod):
     if nDerivationMethod != 0:
@@ -61,9 +63,6 @@ print(binascii.hexlify(decryptEncPriv(encryptedPrivateKey)))
 
 
 ##Example Code:
-
-# def SetIV(self, iv):
-#     self.chIV = [ordsix(i) for i in iv]
 
 # def SetKeyFromPassphrase(self, vKeyData, vSalt, nDerivIterations, nDerivationMethod):
 #     if nDerivationMethod != 0:
