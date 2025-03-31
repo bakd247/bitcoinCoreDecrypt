@@ -2,10 +2,10 @@ import hashlib
 import binascii
 import pyaes
 
-password = b"Maryjane1"
-salt = binascii.unhexlify("ddb003131dc689c1")
-iterations = 28412  # Example: 200000
-encrypted_master_key = binascii.unhexlify("37b3ee0906a2f34aac4c56c9fd5d0bd9277e2feb760615159ea039fc48bea3f27e903be93c3dfaedba4b556df4f698ba")
+password = b"password"
+salt = binascii.unhexlify("salt in hex")
+iterations = iteration count  # Example: 200000
+encrypted_master_key = binascii.unhexlify("encrypted master key")
 
 derived_key = password + salt
 for i in range(iterations):
