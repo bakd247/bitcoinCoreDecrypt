@@ -26,6 +26,7 @@ publicKey = binascii.unhexlify("public key")
 encrypted_priv_Key = (binascii.unhexlify("encrypted private key"))
 master_Key = decryptedData[0:32]
 newIV = (hashlib.sha256(hashlib.sha256(publicKey).digest()).digest())[0:16]
+print("This is The IV generated From Hashing The Public Key:",(binascii.hexlify(newIV)))
 
 decrypter2 = pyaes.Decrypter(pyaes.AESModeOfOperationCBC(master_Key, newIV))
 decryptedData2 = decrypter2.feed(encrypted_priv_Key)
