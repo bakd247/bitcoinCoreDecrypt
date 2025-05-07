@@ -20,7 +20,7 @@ decrypter = pyaes.Decrypter(pyaes.AESModeOfOperationCBC(aes_key, aes_iv))
 decryptedData = decrypter.feed(encrypted_master_key)
 decryptedData += decrypter.feed()
 
-print(binascii.hexlify(decryptedData))
+print("This is Your AES Key Generated From hashing Your passphrase:",(binascii.hexlify(decryptedData)))
 
 publicKey = binascii.unhexlify("public key")
 encrypted_priv_Key = (binascii.unhexlify("encrypted private key"))
@@ -31,4 +31,4 @@ decrypter2 = pyaes.Decrypter(pyaes.AESModeOfOperationCBC(master_Key, newIV))
 decryptedData2 = decrypter2.feed(encrypted_priv_Key)
 decryptedData2 += decrypter2.feed()
 
-print(binascii.hexlify(decryptedData2))
+print("This is Your Decrypted Private Key:",(binascii.hexlify(decryptedData2)))
